@@ -1,0 +1,17 @@
+{
+	"Create a basic command": {
+		"prefix": "cmd",
+		"body": [
+			"import { RunFunction } from \"./../../interfaces/ICommand\";",
+			"",
+			"export const name: string = \"${1:name}\";",
+			"export const category: string = \"${2:category}\";",
+			"export const aliases: string[] = [];",
+			"export const run: RunFunction = async (client, message) => {",
+			"  ${0}",
+			"};",
+			""
+		],
+		"description": "Create a basic command"
+	}
+}

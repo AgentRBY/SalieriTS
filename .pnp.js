@@ -19,14 +19,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "SalieriTS",
+        "name": "salierits",
         "reference": "workspace:."
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["SalieriTS", ["workspace:."]]
+      ["salierits", ["workspace:."]]
     ],
     "fallbackPool": [
     ],
@@ -48,8 +48,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:5.1.3"],
             ["lint-staged", "npm:10.5.4"],
             ["prettier", "npm:2.2.1"],
-            ["ts-node", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:9.1.1"],
-            ["ts-node-dev", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:1.1.6"],
+            ["ts-node", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1"],
+            ["ts-node-dev", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:1.1.6"],
             ["typescript", "patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"]
           ],
           "linkType": "SOFT",
@@ -397,29 +397,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["through", "npm:2.3.8"]
           ],
           "linkType": "HARD",
-        }]
-      ]],
-      ["SalieriTS", [
-        ["workspace:.", {
-          "packageLocation": "./",
-          "packageDependencies": [
-            ["SalieriTS", "workspace:."],
-            ["@commitlint/cli", "npm:12.1.0"],
-            ["@commitlint/config-angular", "npm:12.0.1"],
-            ["@types/glob", "npm:7.1.3"],
-            ["@types/node", "npm:14.14.31"],
-            ["@types/prettier", "npm:2.2.2"],
-            ["consola", "npm:2.15.3"],
-            ["discord.js", "npm:12.5.1"],
-            ["glob", "npm:7.1.6"],
-            ["husky", "npm:5.1.3"],
-            ["lint-staged", "npm:10.5.4"],
-            ["prettier", "npm:2.2.1"],
-            ["ts-node", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:9.1.1"],
-            ["ts-node-dev", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:1.1.6"],
-            ["typescript", "patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"]
-          ],
-          "linkType": "SOFT",
         }]
       ]],
       ["abbrev", [
@@ -3073,6 +3050,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["salierits", [
+        ["workspace:.", {
+          "packageLocation": "./",
+          "packageDependencies": [
+            ["salierits", "workspace:."],
+            ["@commitlint/cli", "npm:12.1.0"],
+            ["@commitlint/config-angular", "npm:12.0.1"],
+            ["@types/glob", "npm:7.1.3"],
+            ["@types/node", "npm:14.14.31"],
+            ["@types/prettier", "npm:2.2.2"],
+            ["consola", "npm:2.15.3"],
+            ["discord.js", "npm:12.5.1"],
+            ["glob", "npm:7.1.6"],
+            ["husky", "npm:5.1.3"],
+            ["lint-staged", "npm:10.5.4"],
+            ["prettier", "npm:2.2.1"],
+            ["ts-node", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1"],
+            ["ts-node-dev", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:1.1.6"],
+            ["typescript", "patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
       ["semver", [
         ["npm:5.7.1", {
           "packageLocation": "./.yarn/cache/semver-npm-5.7.1-40bcea106b-06ff0ed753.zip/node_modules/semver/",
@@ -3528,10 +3528,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:9.1.1", {
-          "packageLocation": "./.yarn/$$virtual/ts-node-virtual-73d0b51323/0/cache/ts-node-npm-9.1.1-4ad31da228-a90db4a342.zip/node_modules/ts-node/",
+        ["virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1", {
+          "packageLocation": "./.yarn/$$virtual/ts-node-virtual-8b4849e962/0/cache/ts-node-npm-9.1.1-4ad31da228-a90db4a342.zip/node_modules/ts-node/",
           "packageDependencies": [
-            ["ts-node", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:9.1.1"],
+            ["ts-node", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1"],
             ["@types/typescript", null],
             ["arg", "npm:4.1.3"],
             ["create-require", "npm:1.1.1"],
@@ -3556,10 +3556,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:1.1.6", {
-          "packageLocation": "./.yarn/$$virtual/ts-node-dev-virtual-8f01ebe357/0/cache/ts-node-dev-npm-1.1.6-e6df3f5219-565064856b.zip/node_modules/ts-node-dev/",
+        ["virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:1.1.6", {
+          "packageLocation": "./.yarn/$$virtual/ts-node-dev-virtual-04602191e2/0/cache/ts-node-dev-npm-1.1.6-e6df3f5219-565064856b.zip/node_modules/ts-node-dev/",
           "packageDependencies": [
-            ["ts-node-dev", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:1.1.6"],
+            ["ts-node-dev", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:1.1.6"],
             ["@types/node-notifier", null],
             ["@types/typescript", null],
             ["chokidar", "npm:3.5.1"],
@@ -3572,7 +3572,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rimraf", "npm:2.7.1"],
             ["source-map-support", "npm:0.5.19"],
             ["tree-kill", "npm:1.2.2"],
-            ["ts-node", "virtual:61c58cd0e013f9389484cab21e3c628dbc0e0a17aeb155af0a70a114458e072f88d405f5e2fbc1a4e70779115ab68a5ae9b38edd7cf183a39e7e04c11ce3f620#npm:9.1.1"],
+            ["ts-node", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1"],
             ["tsconfig", "npm:7.0.0"],
             ["typescript", "patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"]
           ],
