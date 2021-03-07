@@ -7,8 +7,11 @@ export const aliases: string[] = ["хелп", "помощь"];
 export const description: string =
   "Shows a list of commands or information about a command";
 export const usage: string = "help [command]";
-export const example: Array<Example> = [
-  { command: "help", description: "Shows all available commands" },
+export const examples: Array<Example> = [
+  {
+    command: "help",
+    description: "Shows all available commands",
+  },
   {
     command: "help ping",
     description: "Shows information about `ping` command",
@@ -78,9 +81,9 @@ export const run: RunFunction = async (client, message, args) => {
     description += `
     **Usage**: \n┗ \`${client.config.prefix}${command.usage}\``;
   }
-  if (command.example?.length) {
+  if (command.examples?.length) {
     description += "\n";
-    command.example.forEach((example, index) => {
+    command.examples.forEach((example, index) => {
       description += `
         **Example ${++index}:**
         \`${client.config.prefix}${example.command}\`

@@ -11,7 +11,7 @@ export interface Command {
   aliases?: string[];
   description?: string;
   usage?: string;
-  example?: Array<Example>;
+  examples?: Array<Example>;
   run: RunFunction;
 }
 
