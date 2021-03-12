@@ -1,17 +1,25 @@
 {
-	"Create a basic command": {
-		"prefix": "cmd",
-		"body": [
-			"import { RunFunction } from \"./../../interfaces/ICommand\";",
-			"",
-			"export const name: string = \"${1:name}\";",
-			"export const category: string = \"${2:category}\";",
-			"export const aliases: string[] = [];",
-			"export const run: RunFunction = async (client, message) => {",
-			"  ${0}",
-			"};",
-			""
-		],
-		"description": "Create a basic command"
-	}
+  "Create a command": {
+    "prefix": "cmd",
+    "body": [
+      "import { Example, RunFunction } from \"./../../interfaces/ICommand\";",
+      "",
+      "export const name: string = \"${1:name}\";",
+      "export const category: string = \"${2:category}\";",
+      "export const aliases: string[] = [];",
+      "export const description: string = \"\";",
+      "export const usage: string = \"${1:name}\";",
+      "export const examples: Array<Example> = [",
+      "  {",
+      "    command: \"\",",
+      "    description: \"\",",
+      "  }",
+      "];",
+      "export const run: RunFunction = async (client, message, args) => {",
+      "  ${0}",
+      "};",
+      ""
+    ],
+    "description": "Create a command"
+  }
 }
