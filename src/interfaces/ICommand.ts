@@ -1,5 +1,5 @@
 import { Bot } from "../client/Client";
-import { Message } from "discord.js";
+import { Message, PermissionString } from "discord.js";
 
 export interface RunFunction {
   (client: Bot, message: Message, args: string[]): Promise<unknown>;
@@ -12,6 +12,9 @@ export interface Command {
   description?: string;
   usage?: string;
   examples?: Array<Example>;
+  ownerOnly?: boolean;
+  memberPermissions?: Array<PermissionString>;
+  botPermissions?: Array<PermissionString>;
   run: RunFunction;
 }
 
