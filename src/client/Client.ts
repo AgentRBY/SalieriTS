@@ -7,12 +7,15 @@ import {
   Intents,
   Collection,
 } from "discord.js";
+import mongoose from "mongoose";
 import glob from "glob";
 import { Command } from "../interfaces/ICommand";
 import { Event } from "../interfaces/IEvent";
 import { promisify } from "util";
 import { Config } from "./../interfaces/IConfig";
-
+import { Schema } from "./../interfaces/ISchema";
+import { DatabaseManager } from "../database/Database";
+import { EventEmitter } from "events";
 const globPromise = promisify(glob);
 
 class Bot extends Client {
@@ -22,7 +25,8 @@ class Bot extends Client {
   public categories: Set<string> = new Set();
   public events: Collection<string, Event> = new Collection();
   public config: Config;
-
+  public schemas: Collection<string, Schema> = new Collection();
+  public database: DatabaseManager;
   public constructor() {
     super({
       ws: { intents: Intents.ALL },
@@ -35,26 +39,55 @@ class Bot extends Client {
   }
   public async start(config: Config): Promise<void> {
     this.config = config;
-    this.login(config.token);
+    this.database = new DatabaseManager(this);
+    // load database
+
+    mongoose
+      .connect(config.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .catch((e) => this.logger.error(e));
+
+    //commands load
     const commandFiles: string[] = await globPromise(
       `${__dirname}/../commands/**/*{.ts, .js}`,
     );
-    commandFiles.map(async (value: string) => {
-      const file: Command = await import(value);
+    commandFiles.map(async (commandFile: string) => {
+      const file: Command = await import(commandFile);
       this.commands.set(file.name, file);
       this.categories.add(file.category);
       if (file.aliases?.length) {
-        file.aliases.map((value) => this.aliases.set(value, file.name));
+        file.aliases.map((alias) => this.aliases.set(alias, file.name));
       }
     });
+    // events load
     const eventFiles: string[] = await globPromise(
       `${__dirname}/../events/**/*{.ts, .js}`,
     );
-    eventFiles.map(async (value: string) => {
-      const file: Event = await import(value);
-      this.events.set(file.name, file);
-      this.on(file.name, file.run.bind(null, this));
+    eventFiles.map(async (eventFile: string) => {
+      const event: Event = await import(eventFile);
+      if (event.emitter && typeof event.emitter == "function") {
+        event.emitter(this).on(event.name, event.run.bind(null, this));
+      } else if (event.emitter && event.emitter instanceof EventEmitter) {
+        (event.emitter as EventEmitter).on(
+          event.name,
+          event.run.bind(null, this),
+        );
+      } else {
+        this.on(event.name, event.run.bind(null, this));
+      }
     });
+    // database(schemas) load
+    const modelFiles: string[] = await globPromise(
+      `${__dirname}/../database/models/**/*{.ts, .js}`,
+    );
+    modelFiles.map(async (schemaFile: string) => {
+      const schema: Schema = await import(schemaFile);
+      this.schemas.set(schema.name, schema);
+    });
+
+    this.login(config.token);
   }
   public embed(options: MessageEmbedOptions, message: Message): MessageEmbed {
     return new MessageEmbed({ ...options, color: 3066993 });

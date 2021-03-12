@@ -1,19 +1,32 @@
 import { RunFunction } from "./../../interfaces/IEvent";
 import { Message } from "discord.js";
 import { Command } from "../../interfaces/ICommand";
+import { Database } from "../../database/Database";
+import { Anything } from "./../../interfaces/IAnything";
 
 export const name: string = "message";
 export const run: RunFunction = async (client, message: Message) => {
-  const prefix: string = ">";
-  if (
-    message.author.bot ||
-    !message.guild ||
-    !message.content.toLocaleLowerCase().startsWith(prefix)
-  ) {
+  if (message.partial) {
+    await message.fetch();
+  }
+  if (message.member?.partial) {
+    await message.member.fetch();
+  }
+  const GuildSettingsSchema: Database = await client.database.load(
+    "GuildSettings",
+  );
+  const GuildSettings: Anything = await GuildSettingsSchema.findOne({
+    GuildID: message.guild.id,
+  });
+  const Prefix = GuildSettings?.Prefix || client.config.prefix;
+  if (!message.guild) {
+    return;
+  }
+  if (!message.content.startsWith(Prefix)) {
     return;
   }
   const args: string[] = message.content
-    .slice(prefix.length)
+    .slice(Prefix.length)
     .trim()
     .split(/ +/g);
   const cmd: string = args.shift();

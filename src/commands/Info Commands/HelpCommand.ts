@@ -1,5 +1,7 @@
 import { Command, Example, RunFunction } from "./../../interfaces/ICommand";
 import { EmbedFieldData, MessageEmbed, MessageEmbedFooter } from "discord.js";
+import { Database } from "../../database/Database";
+import { Anything } from "./../../interfaces/IAnything";
 
 export const name: string = "help";
 export const category: string = "info";
@@ -18,6 +20,14 @@ export const examples: Array<Example> = [
   },
 ];
 export const run: RunFunction = async (client, message, args) => {
+  const GuildSettingsSchema: Database = await client.database.load(
+    "GuildSettings",
+  );
+  const GuildSettings: Anything = await GuildSettingsSchema.findOne({
+    GuildID: message.guild.id,
+  });
+
+  const Prefix = GuildSettings?.Prefix || client.config.prefix;
   if (!args.length) {
     const fields: Array<EmbedFieldData> = [...client.categories].map(
       (value: string) => {
@@ -42,7 +52,7 @@ export const run: RunFunction = async (client, message, args) => {
       fields,
       description: `${client.commands.size} commands`,
       footer: {
-        text: `To see a detailed description of the commands use ${client.config.prefix}help [Command name]`,
+        text: `To see a detailed description of the commands use ${Prefix}help [Command name]`,
       },
       color: 3066993,
     });
@@ -60,9 +70,7 @@ export const run: RunFunction = async (client, message, args) => {
     );
   }
 
-  let description: string = `**Command name**: \`${client.config.prefix}${
-    command.name
-  }\`
+  let description: string = `**Command name**: \`${Prefix}${command.name}\`
     **Category**: ${
       command.category[0].toUpperCase() +
       command.category.slice(1).toLowerCase()
@@ -74,21 +82,23 @@ export const run: RunFunction = async (client, message, args) => {
   if (command.aliases?.length) {
     description += `
     **Aliases**: \n┗ ${command.aliases
-      .map((alias) => `\`${client.config.prefix}${alias}\``)
+      .map((alias) => `\`${Prefix}${alias}\``)
       .join(", ")}`;
   }
   if (command.usage) {
     description += `
-    **Usage**: \n┗ \`${client.config.prefix}${command.usage}\``;
+    **Usage**: \n┗ \`${Prefix}${command.usage}\``;
   }
   if (command.examples?.length) {
     description += "\n";
     command.examples.forEach((example, index) => {
-      description += `
-        **Example ${++index}:**
-        \`${client.config.prefix}${example.command}\`
-        ┗ ${example.description}
-      `;
+      if (example.command !== "" && example.description !== "") {
+        description += `
+          **Example ${++index}:**
+          \`${Prefix}${example.command}\`
+          ┗ ${example.description}
+        `;
+      }
     });
   }
   return await message.channel.send(
