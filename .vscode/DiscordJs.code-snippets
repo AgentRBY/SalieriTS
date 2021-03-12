@@ -3,6 +3,7 @@
     "prefix": "cmd",
     "body": [
       "import { Example, RunFunction } from \"./../../interfaces/ICommand\";",
+      "import { PermissionString } from \"discord.js\";",
       "",
       "export const name: string = \"${1:name}\";",
       "export const category: string = \"${2:category}\";",
@@ -15,6 +16,9 @@
       "    description: \"\",",
       "  }",
       "];",
+      "export const memberPermissions: Array<PermissionString> = [];",
+      "export const botPermissions: Array<PermissionString> = [];",
+      "export const ownerOnly: boolean = false;",
       "export const run: RunFunction = async (client, message, args) => {",
       "  ${0}",
       "};",
