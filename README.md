@@ -1,3 +1,3 @@
 # SalieriTS
 
-Salieri is a discrod bot written in TypeScript. Made by Agent*RBY*, inspired by Salieri (Js)
+Salieri is a discrod bot written in TypeScript. Made by Agent_RBY_, inspired by Salieri (Js)
