@@ -38,7 +38,6 @@ export const run: RunFunction = async (client, message: Message) => {
   }
   if (
     command.ownerOnly &&
-    command.ownerOnly === true &&
     !client.config.ownersID.includes(message.author.id)
   ) {
     const embed: MessageEmbed = new MessageEmbed({
