@@ -79,6 +79,10 @@ export const run: RunFunction = async (client, message, args) => {
     description += `
     **Description**: ${command.description}`;
   }
+  if (command.ownerOnly) {
+    description += `
+    __**Only owner**__: This command only for bot owners`;
+  }
   if (command.aliases?.length) {
     description += `
     **Aliases**: \n┗ ${command.aliases
