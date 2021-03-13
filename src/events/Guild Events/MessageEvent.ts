@@ -41,7 +41,10 @@ export const run: RunFunction = async (client, message: Message) => {
     command.ownerOnly === true &&
     !client.config.ownersID.includes(message.author.id)
   ) {
-    return;
+    const embed: MessageEmbed = new MessageEmbed({
+      description: `You don't have enough permissions for that`,
+    });
+    return message.channel.send(embed);
   }
   if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) {
     const guildOwner: GuildMember = message.guild.owner;
@@ -57,7 +60,7 @@ export const run: RunFunction = async (client, message: Message) => {
       .has(command.memberPermissions)
   ) {
     const embed: MessageEmbed = new MessageEmbed({
-      description: `You don't have enough permissions, you need: ${command.memberPermissions
+      description: `You don't have enough permissions for that, you need: ${command.memberPermissions
         .map((value) => {
           return `\`${Permissions[value]}\``;
         })
@@ -72,7 +75,7 @@ export const run: RunFunction = async (client, message: Message) => {
       .has(command.botPermissions)
   ) {
     const embed: MessageEmbed = new MessageEmbed({
-      description: `I don't have enough permissions, me need: ${command.botPermissions
+      description: `I don't have enough permissions for that, me need: ${command.botPermissions
         .map((value) => {
           return `\`${Permissions[value]}\``;
         })
