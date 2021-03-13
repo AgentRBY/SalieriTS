@@ -54,7 +54,7 @@ export const run: RunFunction = async (client, message: Message) => {
     return guildOwner.send(embed);
   }
   if (
-    command.memberPermissions &&
+    command.memberPermissions?.length &&
     !message.channel
       .permissionsFor(message.member)
       .has(command.memberPermissions)
@@ -69,7 +69,7 @@ export const run: RunFunction = async (client, message: Message) => {
     return message.channel.send(embed);
   }
   if (
-    command.botPermissions &&
+    command.botPermissions?.length &&
     !message.channel
       .permissionsFor(message.guild.me)
       .has(command.botPermissions)
