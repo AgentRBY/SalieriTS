@@ -52,6 +52,18 @@ export const run: RunFunction = async (client, message: Message) => {
     });
     return guildOwner.send(embed);
   }
+  if (!message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) {
+    return message.channel.send(
+      "I don't have permission to send Embed messages. Please, give me `Embed Links` permission",
+    );
+  }
+  if (
+    !message.channel.permissionsFor(message.guild.me).has("USE_EXTERNAL_EMOJIS")
+  ) {
+    return message.channel.send(
+      "I don't have permission to send external emoji. Please, give me `Use external emojis` permission",
+    );
+  }
   if (
     command.memberPermissions?.length &&
     !message.channel
