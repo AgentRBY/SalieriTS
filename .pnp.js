@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:5.1.3"],
             ["lint-staged", "npm:10.5.4"],
             ["mongoose", "npm:5.12.0"],
+            ["node-cmd", "npm:4.0.0"],
             ["prettier", "npm:2.2.1"],
             ["ts-node", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1"],
             ["ts-node-dev", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:1.1.6"],
@@ -2572,6 +2573,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["node-cmd", [
+        ["npm:4.0.0", {
+          "packageLocation": "./.yarn/cache/node-cmd-npm-4.0.0-6634ce83e6-fdd2a7d042.zip/node_modules/node-cmd/",
+          "packageDependencies": [
+            ["node-cmd", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["node-fetch", [
         ["npm:2.6.1", {
           "packageLocation": "./.yarn/cache/node-fetch-npm-2.6.1-46c670dbc1-cbb171635e.zip/node_modules/node-fetch/",
@@ -3319,6 +3329,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:5.1.3"],
             ["lint-staged", "npm:10.5.4"],
             ["mongoose", "npm:5.12.0"],
+            ["node-cmd", "npm:4.0.0"],
             ["prettier", "npm:2.2.1"],
             ["ts-node", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:9.1.1"],
             ["ts-node-dev", "virtual:aefd6baa7f738b351cec161db0054c3a8d647db72a6f6a09485a99af0af61e82edbc39895add4dcd7461eb1193eedf361141b30d227b825a4db90cd81e82f069#npm:1.1.6"],
