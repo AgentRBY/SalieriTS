@@ -2,6 +2,7 @@ import { Command, Example, RunFunction } from "./../../interfaces/ICommand";
 import { EmbedFieldData, MessageEmbed, MessageEmbedFooter } from "discord.js";
 import { Database } from "../../database/Database";
 import { Anything } from "./../../interfaces/IAnything";
+import { defaultSettings } from "../../static/BotConfig";
 
 export const name: string = "help";
 export const category: string = "info";
@@ -20,34 +21,28 @@ export const examples: Array<Example> = [
   },
 ];
 export const run: RunFunction = async (client, message, args) => {
-  const GuildSettingsSchema: Database = await client.database.load(
-    "GuildSettings",
-  );
+  const GuildSettingsSchema: Database = await client.database.load("GuildSettings");
   const GuildSettings: Anything = await GuildSettingsSchema.findOne({
     GuildID: message.guild.id,
   });
 
-  const Prefix = GuildSettings?.Prefix || client.config.prefix;
+  const Prefix = GuildSettings?.Prefix || defaultSettings.Prefix;
   if (!args.length) {
-    const fields: Array<EmbedFieldData> = [...client.categories].map(
-      (value: string) => {
-        return {
-          name: `${value[0].toUpperCase() + value.slice(1).toLowerCase()} [${
-            client.commands.filter(
-              (command: Command) =>
-                command.category.toLowerCase() === value.toLowerCase(),
-            ).size
-          }]`,
-          value: client.commands
-            .filter(
-              (command: Command) =>
-                command.category.toLowerCase() === value.toLowerCase(),
-            )
-            .map((command: Command) => `\`${command.name}\``)
-            .join(", "),
-        };
-      },
-    );
+    const fields: Array<EmbedFieldData> = [...client.categories].map((value: string) => {
+      return {
+        name: `${value[0].toUpperCase() + value.slice(1).toLowerCase()} [${
+          client.commands.filter(
+            (command: Command) => command.category.toLowerCase() === value.toLowerCase(),
+          ).size
+        }]`,
+        value: client.commands
+          .filter(
+            (command: Command) => command.category.toLowerCase() === value.toLowerCase(),
+          )
+          .map((command: Command) => `\`${command.name}\``)
+          .join(", "),
+      };
+    });
     const commandEmbed: MessageEmbed = new MessageEmbed({
       fields,
       description: `${client.commands.size} commands`,
@@ -59,8 +54,7 @@ export const run: RunFunction = async (client, message, args) => {
     return await message.channel.send(commandEmbed);
   }
   const command: Command =
-    client.commands.get(args[0]) ||
-    client.commands.get(client.aliases.get(args[0]));
+    client.commands.get(args[0]) || client.commands.get(client.aliases.get(args[0]));
   if (!command) {
     return await message.channel.send(
       new MessageEmbed({
@@ -72,8 +66,7 @@ export const run: RunFunction = async (client, message, args) => {
 
   let description: string = `**Command name**: \`${Prefix}${command.name}\`
     **Category**: ${
-      command.category[0].toUpperCase() +
-      command.category.slice(1).toLowerCase()
+      command.category[0].toUpperCase() + command.category.slice(1).toLowerCase()
     }`;
   if (command.description) {
     description += `
@@ -109,7 +102,7 @@ export const run: RunFunction = async (client, message, args) => {
     new MessageEmbed({
       title: `Information about \`${command.name}\` command`,
       description,
-      footer: { text: "Syntax: <> = required, [] = optional" },
+      footer: { text: "Syntax: <> = required, [] = optional, | - or, / - identical" },
       color: 3066993,
     }),
   );

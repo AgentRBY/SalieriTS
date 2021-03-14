@@ -20,6 +20,11 @@ class Utils {
 
     return undefined;
   }
+  public getSingeObject(key: string, value: any): Object {
+    const object = {};
+    object[key] = value;
+    return object;
+  }
 }
 
 class EmbedUtils {

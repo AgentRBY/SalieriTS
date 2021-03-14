@@ -4,6 +4,7 @@ import { Command } from "../../interfaces/ICommand";
 import { Database } from "../../database/Database";
 import { Anything } from "./../../interfaces/IAnything";
 import { Permissions } from "./../../static/Permissions";
+import { defaultSettings } from "../../static/BotConfig";
 
 export const name: string = "message";
 export const run: RunFunction = async (client, message: Message) => {
@@ -20,7 +21,7 @@ export const run: RunFunction = async (client, message: Message) => {
   const GuildSettings: Anything = await GuildSettingsSchema.findOne({
     GuildID: message.guild.id,
   });
-  const Prefix = GuildSettings?.Prefix || client.config.prefix;
+  const Prefix = GuildSettings?.Prefix || defaultSettings.Prefix;
   if (!message.content.startsWith(Prefix)) {
     return;
   }
