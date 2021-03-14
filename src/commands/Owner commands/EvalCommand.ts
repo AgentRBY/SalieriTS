@@ -6,7 +6,7 @@ import { colors } from "../../static/BotConfig";
 export const name: string = "eval";
 export const category: string = "owner";
 export const aliases: string[] = [];
-export const description: string = "";
+export const description: string = "Evaluete a JS code";
 export const usage: string = "eval <code>";
 export const examples: Array<Example> = [
   {
@@ -19,7 +19,7 @@ export const botPermissions: Array<PermissionString> = [];
 export const ownerOnly: boolean = false;
 export const run: RunFunction = async (client, message, args) => {
   if (!args.length) {
-    return message.channel.send(client.embed({ description: "Please provide some code" }, message));
+    return message.channel.send(client.embedUtils.createErrorEmbed("Please provide some code"));
   }
   try {
     const result = await eval(args.join(" "));
