@@ -16,6 +16,7 @@ import { Config } from "./../interfaces/IConfig";
 import { Schema } from "./../interfaces/ISchema";
 import { DatabaseManager } from "../database/Database";
 import { EventEmitter } from "events";
+import { Utils } from "../utils/Utils";
 const globPromise = promisify(glob);
 
 class Bot extends Client {
@@ -27,6 +28,7 @@ class Bot extends Client {
   public config: Config;
   public schemas: Collection<string, Schema> = new Collection();
   public database: DatabaseManager;
+  public utils: Utils;
   public constructor() {
     super({
       ws: { intents: Intents.ALL },
@@ -40,6 +42,7 @@ class Bot extends Client {
   public async start(config: Config): Promise<void> {
     this.config = config;
     this.database = new DatabaseManager(this);
+    this.utils = new Utils(this);
     // load database
 
     mongoose
