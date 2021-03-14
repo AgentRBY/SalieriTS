@@ -16,7 +16,7 @@ import { Config } from "./../interfaces/IConfig";
 import { Schema } from "./../interfaces/ISchema";
 import { DatabaseManager } from "../database/Database";
 import { EventEmitter } from "events";
-import { Utils } from "../utils/Utils";
+import { EmbedUtils, Utils } from "../utils/Utils";
 const globPromise = promisify(glob);
 
 class Bot extends Client {
@@ -28,6 +28,7 @@ class Bot extends Client {
   public config: Config;
   public schemas: Collection<string, Schema> = new Collection();
   public database: DatabaseManager;
+  public embedUtils: EmbedUtils;
   public utils: Utils;
   public constructor() {
     super({
@@ -42,6 +43,7 @@ class Bot extends Client {
   public async start(config: Config): Promise<void> {
     this.config = config;
     this.database = new DatabaseManager(this);
+    this.embedUtils = new EmbedUtils(this);
     this.utils = new Utils(this);
     // load database
 
@@ -73,10 +75,7 @@ class Bot extends Client {
       if (event.emitter && typeof event.emitter == "function") {
         event.emitter(this).on(event.name, event.run.bind(null, this));
       } else if (event.emitter && event.emitter instanceof EventEmitter) {
-        (event.emitter as EventEmitter).on(
-          event.name,
-          event.run.bind(null, this),
-        );
+        (event.emitter as EventEmitter).on(event.name, event.run.bind(null, this));
       } else {
         this.on(event.name, event.run.bind(null, this));
       }
@@ -89,7 +88,15 @@ class Bot extends Client {
       const schema: Schema = await import(schemaFile);
       this.schemas.set(schema.name, schema);
     });
-
+    this.logger.info(
+      `Report error are ${this.config.reportErrors ? "enabled" : "disabled"}`,
+    );
+    this.logger.info(`Developer mode is ${this.config.devMode ? "Enabled" : "Disabled"}`);
+    if (this.config.reportErrors) {
+      this.logger.info(`Report errors are Enabled`);
+    } else {
+      this.logger.warn(`Report errors are Disabled`);
+    }
     this.login(config.token);
   }
   public embed(options: MessageEmbedOptions, message: Message): MessageEmbed {
