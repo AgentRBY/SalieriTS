@@ -3,4 +3,6 @@ export interface Config {
   prefix: ">";
   mongoURI: string;
   ownersID: string[];
+  reportErrors: boolean;
+  devMode: boolean;
 }
