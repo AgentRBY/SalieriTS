@@ -28,12 +28,17 @@
   },
   "Create error embed": {
     "prefix": "error",
-    "body": ["client.utils.createErrorEmbed(${0})"],
+    "body": ["client.embedUtils.createErrorEmbed(${0})"],
     "description": "Create error embed"
   },
   "Create success embed": {
     "prefix": "success",
-    "body": ["client.utils.createSuccessEmbed(${0})"],
+    "body": ["client.embedUtils.createSuccessEmbed(${0})"],
     "description": "Create success embed"
+  },
+  "Create settings embed": {
+    "prefix": "settings",
+    "body": ["client.embedUtils.createSettingsEmbed(${0})"],
+    "description": "Create settings embed"
   }
 }
