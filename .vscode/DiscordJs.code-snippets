@@ -32,7 +32,7 @@
     "description": "Create error embed"
   },
   "Create success embed": {
-    "prefix": "error",
+    "prefix": "success",
     "body": ["client.utils.createSuccessEmbed(${0})"],
     "description": "Create success embed"
   }
