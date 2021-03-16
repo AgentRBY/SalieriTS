@@ -1,7 +1,7 @@
 import { Example, RunFunction } from "./../../interfaces/ICommand";
 
 export const name: string = "balance";
-export const category: string = "economy";
+export const module: string = "Economy";
 export const aliases: string[] = [];
 export const description: string = "";
 export const usage: string = "balance";

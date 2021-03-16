@@ -2,7 +2,7 @@ import { Example, RunFunction } from "./../../interfaces/ICommand";
 import { PermissionString } from "discord.js";
 
 export const name: string = "test";
-export const category: string = "info";
+export const module: string = "Information";
 export const aliases: string[] = [];
 export const description: string = "123";
 export const usage: string = "test";

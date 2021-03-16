@@ -3,7 +3,7 @@ import { PermissionString } from "discord.js";
 import fs from "fs";
 
 export const name: string = "devmode";
-export const category: string = "owner";
+export const module: string = "Owner";
 export const aliases: string[] = ["dev"];
 export const description: string = "Enable/Disable developer mode";
 export const usage: string = "devmode <yes/no style>";

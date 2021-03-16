@@ -3,7 +3,7 @@ import { PermissionString } from "discord.js";
 import cmd from "node-cmd";
 
 export const name: string = "console";
-export const category: string = "owner";
+export const module: string = "Owner";
 export const aliases: string[] = ["cmd"];
 export const description: string = "Evaluate console command";
 export const usage: string = "console <console command>";

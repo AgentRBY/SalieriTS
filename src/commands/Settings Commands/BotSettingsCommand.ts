@@ -1,13 +1,13 @@
-import { Example, RunFunction } from "./../../interfaces/ICommand";
+import { Example, RunFunction } from "../../interfaces/ICommand";
 import { MessageEmbed, PermissionString } from "discord.js";
-import { settings } from "./../../static/Settings";
+import { settings } from "../../static/Settings";
 import { colors, emojisLinks } from "../../static/BotConfig";
 import { Database } from "../../database/Database";
-import { Anything } from "./../../interfaces/IAnything";
-import { Setting } from "./../../interfaces/ISettings";
+import { Anything } from "../../interfaces/IAnything";
+import { Setting } from "../../interfaces/ISettings";
 
-export const name: string = "settings";
-export const category: string = "settings";
+export const name: string = "botSettings";
+export const module: string = "Settings";
 export const aliases: string[] = ["config", "options"];
 export const description: string = "Allows you to configure the bot";
 export const usage: string = "settings <parameter> <value | default/delete>";
@@ -41,7 +41,7 @@ export const run: RunFunction = async (client, message, args) => {
     }
     embed.setColor(colors.Gray);
     embed.setDescription("List of bot settings");
-    embed.setAuthor("Bot settings", emojisLinks.Setings);
+    embed.setAuthor("Bot settings", emojisLinks.Settings);
     return message.channel.send(embed);
   }
   const setting: Setting = settings.find(

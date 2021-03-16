@@ -6,7 +6,7 @@
       "import { PermissionString } from \"discord.js\";",
       "",
       "export const name: string = \"${1:name}\";",
-      "export const category: string = \"${2:category}\";",
+      "export const module: string = \"${2:module}\";",
       "export const aliases: string[] = [];",
       "export const description: string = \"\";",
       "export const usage: string = \"${1:name}\";",

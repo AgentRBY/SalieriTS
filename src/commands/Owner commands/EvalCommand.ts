@@ -4,7 +4,7 @@ import { inspect } from "util";
 import { colors } from "../../static/BotConfig";
 
 export const name: string = "eval";
-export const category: string = "owner";
+export const module: string = "Owner";
 export const aliases: string[] = [];
 export const description: string = "Evaluete a JS code";
 export const usage: string = "eval <code>";
@@ -19,7 +19,9 @@ export const botPermissions: Array<PermissionString> = [];
 export const ownerOnly: boolean = false;
 export const run: RunFunction = async (client, message, args) => {
   if (!args.length) {
-    return message.channel.send(client.embedUtils.createErrorEmbed("Please provide some code"));
+    return message.channel.send(
+      client.embedUtils.createErrorEmbed("Please provide some code"),
+    );
   }
   try {
     const result = await eval(args.join(" "));
@@ -52,7 +54,10 @@ export const run: RunFunction = async (client, message, args) => {
       error = error.slice(0, 1950) + "...";
       footer = "cropped";
     }
-    const embed = new MessageEmbed().setDescription(error).setColor(colors.Red).setFooter(footer);
+    const embed = new MessageEmbed()
+      .setDescription(error)
+      .setColor(colors.Red)
+      .setFooter(footer);
     return message.channel.send(embed);
   }
 };

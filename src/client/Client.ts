@@ -17,13 +17,15 @@ import { Schema } from "./../interfaces/ISchema";
 import { DatabaseManager } from "../database/Database";
 import { EventEmitter } from "events";
 import { EmbedUtils, Utils } from "../utils/Utils";
+import { Module } from "./../interfaces/IModule";
+import { Modules } from "./../static/Modules";
 const globPromise = promisify(glob);
 
 class Bot extends Client {
   public logger: Consola = consola;
   public commands: Collection<string, Command> = new Collection();
   public aliases: Collection<string, string> = new Collection();
-  public categories: Set<string> = new Set();
+  public modules: Collection<string, Module> = new Collection();
   public events: Collection<string, Event> = new Collection();
   public config: Config;
   public schemas: Collection<string, Schema> = new Collection();
@@ -60,10 +62,13 @@ class Bot extends Client {
     );
     commandFiles.map(async (commandFile: string) => {
       const file: Command = await import(commandFile);
-      this.commands.set(file.name, file);
-      this.categories.add(file.category);
+      this.commands.set(file.name.toLowerCase(), file);
+      this.modules.set(
+        file.module.toLowerCase(),
+        Modules.filter((module) => module.name === file.module)[0],
+      );
       if (file.aliases?.length) {
-        file.aliases.map((alias) => this.aliases.set(alias, file.name));
+        file.aliases.map((alias) => this.aliases.set(alias.toLowerCase(), file.name));
       }
     });
     // events load

@@ -2,7 +2,7 @@ import { RunFunction } from "./../../interfaces/ICommand";
 import { Message } from "discord.js";
 
 export const name: string = "ping";
-export const category: string = "info";
+export const module: string = "Information";
 export const aliases: string[] = ["пинг"];
 export const run: RunFunction = async (client, message) => {
   const msg: Message = await message.channel.send("Pinging...");
