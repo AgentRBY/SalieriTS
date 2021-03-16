@@ -25,6 +25,9 @@ class Utils {
     object[key] = value;
     return object;
   }
+  public upFirstLetter(text: string): string {
+    return text[0].toUpperCase() + text.slice(1);
+  }
 }
 
 class EmbedUtils {
