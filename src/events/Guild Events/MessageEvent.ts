@@ -28,7 +28,8 @@ export const run: RunFunction = async (client, message: Message) => {
   const args: string[] = message.content.slice(Prefix.length).trim().split(/ +/g);
   const cmd: string = args.shift();
   const command: Command =
-    client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
+    client.commands.get(cmd.toLowerCase()) ||
+    client.commands.get(client.aliases.get(cmd.toLowerCase()));
   if (!command) {
     return;
   }
